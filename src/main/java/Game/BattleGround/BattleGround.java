@@ -51,14 +51,18 @@ public class BattleGround {
         Damage damage = attacker.attack();
         defender.setHealth(defender.getHealth() - damage.getAmount());
         if (damage.getType() != Damage.DamageType.MISS) {
-            System.out.printf("%s наносит %s %d урона (%s).%n", attacker.getName(), defender.getName(), damage.getAmount(), damage.getType());
-            System.out.printf("У %s осталось %d HP из %d HP%n", defender.getName(), defender.getHealth(), defender.getMaxHealth());
+            System.out.printf("%s наносит %s %d урона (%s).%n", attacker.getName(), defender.getName(),
+                                                                damage.getAmount(), damage.getType());
+            System.out.printf("У %s осталось %d HP из %d HP%n", defender.getName(), defender.getHealth(),
+                                                                defender.getMaxHealth());
             if (defender.getHealth() <= 0) {
                 if (defender instanceof Player) {
                     System.out.println("ВЫ ПОГОИБЛИ!");
                     callback.lose();
                 } else {
-                    System.out.printf("%s ПОГИБ.%nВЫ ПОЛУЧИЛИ %d XP И %d ЗОЛОТА.%n", defender.getName(), defender.getExp(), defender.getGold());
+                    System.out.printf("%s ПОГИБ.%nВЫ ПОЛУЧИЛИ %d XP И %d ЗОЛОТА.%n", defender.getName(),
+                                                                                    defender.getExp(),
+                                                                                    defender.getGold());
                     attacker.addExp(defender.getExp());
                     attacker.addGold(defender.getGold());
                     System.out.println(attacker);

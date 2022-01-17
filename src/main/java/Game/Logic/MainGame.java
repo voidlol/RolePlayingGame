@@ -4,12 +4,13 @@ import Game.BattleGround.BattleGround;
 import Game.BattleGround.FightCallback;
 import InputOutput.ConsoleInput;
 import InputOutput.Input;
+import InputOutput.InputValidator;
 import Menu.Menu;
 import Units.*;
 
 public class MainGame {
 
-    private final Input input = new ConsoleInput();
+    private final Input input = new InputValidator(new ConsoleInput());
     private final BattleGround bg = new BattleGround();
     private Player player = null;
 
@@ -29,7 +30,7 @@ public class MainGame {
 
             @Override
             public void lose() {
-                String inputString = "";
+                String inputString;
                 do {
                     inputString = input.getString("Хотите начать сначала? (y\\n)");
                 } while (!(inputString.equals("n") || inputString.equals("y")));
