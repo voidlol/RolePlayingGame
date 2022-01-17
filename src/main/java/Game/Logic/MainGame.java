@@ -55,9 +55,9 @@ public class MainGame {
     private CharacterUnit createMonster() {
         int randomValue = (int) (Math.random() * 100);
         if (randomValue > 50) {
-            return new Skeleton("Skeleton", 125, 15, 33, 15, 21, 1);
+            return new Skeleton("Скелет", 125, 15, 33, 15, 21, 1);
         } else
-            return new Goblin("Goblin", 200, 35, 9, 36, 35, 1);
+            return new Goblin("Гоблин", 200, 35, 9, 36, 35, 1);
     }
 
     public Player getPlayer() {

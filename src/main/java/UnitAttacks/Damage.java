@@ -3,7 +3,7 @@ package UnitAttacks;
 public class Damage {
 
     public enum DamageType {
-        CRITICAL("CRITICAL HIT"), NORMAL("NORMAL HIT"), MISS("YOU MISSED");
+        CRITICAL("КРИТИЧЕСКИЙ УДАР"), NORMAL("ОБЫЧНОЕ ПОПАДАНИЕ"), MISS("ВЫ ПРОМАХНУЛИСЬ");
 
         private final String name;
         DamageType(String name) {

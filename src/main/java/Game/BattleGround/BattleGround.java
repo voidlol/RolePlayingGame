@@ -26,14 +26,14 @@ public class BattleGround {
     }
 
     public void fight(CharacterUnit player, CharacterUnit monster, FightCallback callback) {
-        System.out.printf("%s (%d/%d HP) attacks %s (%d/%d HP)%n", player.getName(), player.getHealth(), player.getMaxHealth(),
+        System.out.printf("%s (%d/%d HP) напал на %s (%d/%d HP)%n", player.getName(), player.getHealth(), player.getMaxHealth(),
                                                                     monster.getName(), monster.getHealth(), monster.getMaxHealth());
         try {
             fights.put(() -> {
                 boolean isOver = false;
                 int turn = 1;
                 while (!isOver) {
-                    System.out.printf("============TURN %d============%n", turn);
+                    System.out.printf("============ХОД %d============%n", turn);
                     isOver = turn++ % 2 != 0 ? attack(player, monster, callback) : attack(monster, player, callback);
                     try {
                         Thread.sleep(1000);
@@ -51,14 +51,14 @@ public class BattleGround {
         Damage damage = attacker.attack();
         defender.setHealth(defender.getHealth() - damage.getAmount());
         if (damage.getType() != Damage.DamageType.MISS) {
-            System.out.printf("%s hits %s for %d (%s).%n", attacker.getName(), defender.getName(), damage.getAmount(), damage.getType());
-            System.out.printf("%s has %d hp left from total of %d%n", defender.getName(), defender.getHealth(), defender.getMaxHealth());
+            System.out.printf("%s наносит %s %d урона (%s).%n", attacker.getName(), defender.getName(), damage.getAmount(), damage.getType());
+            System.out.printf("У %s осталось %d HP из %d HP%n", defender.getName(), defender.getHealth(), defender.getMaxHealth());
             if (defender.getHealth() <= 0) {
                 if (defender instanceof Player) {
-                    System.out.println("YOU DIED!");
+                    System.out.println("ВЫ ПОГОИБЛИ!");
                     callback.lose();
                 } else {
-                    System.out.printf("%s DIED.%nYOU RECEIVED %d XP and %d GOLD.%n", defender.getName(), defender.getExp(), defender.getGold());
+                    System.out.printf("%s ПОГИБ.%nВЫ ПОЛУЧИЛИ %d XP И %d ЗОЛОТА.%n", defender.getName(), defender.getExp(), defender.getGold());
                     attacker.addExp(defender.getExp());
                     attacker.addGold(defender.getGold());
                     System.out.println(attacker);
@@ -67,7 +67,7 @@ public class BattleGround {
                 return true;
             }
         } else {
-            System.out.printf("%s MISSED!%n", attacker.getName());
+            System.out.printf("%s ПРОМАХНУЛСЯ!%n", attacker.getName());
         }
         return false;
     }
